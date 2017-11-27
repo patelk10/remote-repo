@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: hansa
+ * User: kunal
  * Date: 11/22/2017
  * Time: 1:14 PM
  */
@@ -14,7 +14,7 @@ header('Content-Type: application/json');
 
 $servername = "localhost";
 $username = "admin";
-$password = "Dharmang_25";
+$password = "Kunal_25";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=android_final_project_api", $username, $password);
