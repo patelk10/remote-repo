@@ -1,0 +1,9 @@
+SET logfile="rdp_ip_logs.log"   //Storing log filename in variable
+******* Start*******
+
+date /T>>%logfile%    //Executing date command and appending to file
+time /T>>%logfile%    //Executing time command and appending to file
+psloggedon>>%logfile% //Using third party psloggedon software to get current logged in user
+netstat -n | find ":3389" | find "ESTABLISHED>>%logfile%  //Executing netstat command and appending to logfile
+
+*******END*******

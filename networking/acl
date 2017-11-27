@@ -1,0 +1,13 @@
+--Access Control List
+
+/** Standard ACL **/
+
+/** Creating ACL **/
+
+conf t
+access-list 1 permit 192.168.12.0 0.0.0.255
+
+/** Applying ACL  **/
+conf t
+interface fa0/0
+ip access-group 1 in

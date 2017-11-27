@@ -1,0 +1,8 @@
+/** EIGRP **/
+
+/** Configure on each router  **/
+
+conf t
+router eigrp 1
+network 192.168.13.0 255.255.255.0
+exit
