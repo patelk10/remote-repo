@@ -14,6 +14,8 @@ error_reporting(E_ALL);
 
 header('Content-Type: application/json');
 
+//Database Connection
+
 $servername = "localhost";
 $username = "admin";
 $password = "Kunal_25";
@@ -28,15 +30,17 @@ catch(PDOException $e)
     echo "Connection failed: " . $e->getMessage();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') { //Checking if Request is POST
 
-    $err_msg = [];
-    $json = file_get_contents('php://input');
-    $arrays = json_decode($json, true);
+    $err_msg = [];  //Creating Array named Error
+    $json = file_get_contents('php://input'); //Getting JSON data
+    $arrays = json_decode($json, true);  //Converting JSON data to PHP array
 
+    //Looping through Array to make sure, required data exist.
+    
     for ($i = 0, $len = count($arrays); $i < $len; $i++) {
-        if (empty($arrays[$i]["imei"])) {
-            $err_msg[] = 'IMEI number not provided. '.$i;
+        if (empty($arrays[$i]["imei"])) {   //Checking if IMEI number exist
+            $err_msg[] = 'IMEI number not provided. '.$i;  //Add Error Message to Error Array
         } elseif (empty($arrays[$i]["packageName"])) {
             $err_msg[] = 'Package Name not provided. '.$i;
         } elseif (empty($arrays[$i]["appName"])) {
@@ -44,15 +48,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
+    //Check if error array is empty or not
+
     if (count($err_msg) != 0) {
         echo json_encode($err_msg);
-    } else {
+    } else { //if no error exist
 
-        $stmt = $conn->prepare("INSERT INTO users (imei, packageName, appName) VALUES (:imei, :packageName, :appName)");
-        $stmt->bindParam(':imei', $imei);
-        $stmt->bindParam(':packageName', $packageName);
-        $stmt->bindParam(':appName', $appName);
+        $stmt = $conn->prepare("INSERT INTO users (imei, packageName, appName) VALUES (:imei, :packageName, :appName)"); //Creating INSERT SQL statement
+        $stmt->bindParam(':imei', $imei); //Binding required data
+        $stmt->bindParam(':packageName', $packageName); //Binding required data
+        $stmt->bindParam(':appName', $appName); //Binding required data
 
+        //Looping through array and inserting data to database
+        
         foreach ($arrays as $array) {
             $imei = $array["imei"];
             $packageName = $array["packageName"];
@@ -62,6 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $conn = null;
 
+        //Once datastored tell user data is saved
+        
         $data_saved = array("success" => "true", "message" => "All Data Saved");
         echo json_encode($data_saved);
     }
