@@ -20,6 +20,8 @@ $servername = "localhost";
 $username = "admin";
 $password = "Kunal_25";
 
+//require "database.php";
+
 try {
     $conn = new PDO("mysql:host=$servername;dbname=android_final_project_api", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
