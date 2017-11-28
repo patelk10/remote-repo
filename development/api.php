@@ -1,7 +1,7 @@
 <?php
 /**
  * Server IP address: http://159.203.139.147/api.php
- * PHPmyadmin: http://159.203.139.147/phpmyadmin.php
+ * PHPmyadmin: http://159.203.139.147/phpmyadmin
  * Created by PhpStorm.
  * User: kunal
  * Date: 11/22/2017
